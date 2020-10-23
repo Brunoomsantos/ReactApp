@@ -6,20 +6,23 @@ import Header from './components/Header';
 import './App.css';
 
 function App() {
-    const [projects, setProjects] = useState(['Desenvolvimento de app', 'Front-end web']);
+    const [projects, setProjects] = useState([]);
 
     useEffect(() => {
-        api.get('/projects').then(response => {
-            console.log(response);
+        api.get('projects').then(response => {
+            setProjects(response.data);
         })
     }, []);
 
     function handleAddProject() {
-        //projects.push(`Novo Projeto ${Date.now()}`);
+        //setProjects([... projects, `Novo Projeto ${Date.now()}`]);
+
+        api.post('projects', { 
+            title: `Novo Projeto ${Date.now()}`,
+            owner: "Bruno Olinto"
+        })
         
-        setProjects([... projects, `Novo Projeto ${Date.now()}`]);
-        
-    }
+    };
 
     return (
         <>
@@ -27,7 +30,7 @@ function App() {
 
 
         <ul>
-            {projects.map(project => <li key={project}>{project}</li>)}
+            {projects.map(project => <li key={project.id}>{project.title}</li>)}
         </ul>
 
         <button type="button" onClick={handleAddProject}>Adicionar projeto</button>
