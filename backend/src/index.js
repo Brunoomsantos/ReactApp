@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
-const {uuid, isUuid} = require('uuidv4')
+const {uuid, isUuid} = require('uuidv4');
+//const cron = require('node-cron');//Importação do cron.
 
 const app = express();
 
@@ -10,6 +11,12 @@ app.use(express.json());
 
 
 const projects = [];
+
+const requestLog = function (req, res, next) {
+    return  console.log(Date.now());
+}
+  
+
 
 function logRequest(request, response, next) {
     const { method, url } = request;
@@ -93,6 +100,15 @@ app.delete('/projects/:id', (request, response) => {
 
     return response.status(204).json();
 });
+
+//Criação do Objeto com a tarefa agendada.
+/*
+const task = new cron.schedule('* * * * * *', () => {
+    console.log(requestLog());
+});
+
+task.start();
+*/
 
 app.listen(3333);
 
