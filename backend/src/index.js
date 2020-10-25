@@ -11,11 +11,11 @@ app.use(express.json());
 
 
 const projects = [];
-
+/*
 const requestLog = function (req, res, next) {
     return  console.log(Date.now());
 }
-  
+*/  
 
 
 function logRequest(request, response, next) {
