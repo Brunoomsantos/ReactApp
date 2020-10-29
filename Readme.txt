@@ -6,3 +6,6 @@ Código para execução do Back:  yarn nodemon
 Códigos para execução do Mobile:
 yarn start
 yarn android
+
+
+Projeto criado com os estudos do Bootcamp;
